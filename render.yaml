@@ -1,0 +1,67 @@
+services:
+  # The FastAPI Backend Service
+  - type: web
+    name: voiceforge-api
+    env: docker
+    dockerfilePath: backend/Dockerfile
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: voiceforge-db
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: voiceforge-redis
+          property: connectionString
+      - key: CELERY_BROKER_URL
+        fromService:
+          type: redis
+          name: voiceforge-redis
+          property: connectionString
+      - key: CELERY_RESULT_BACKEND
+        fromService:
+          type: redis
+          name: voiceforge-redis
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+
+  # The Celery Worker for AI Tasks (Requires sufficient RAM/CPU, ideally GPU)
+  - type: worker
+    name: voiceforge-worker
+    env: docker
+    dockerfilePath: worker/Dockerfile
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: voiceforge-db
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: voiceforge-redis
+          property: connectionString
+      - key: CELERY_BROKER_URL
+        fromService:
+          type: redis
+          name: voiceforge-redis
+          property: connectionString
+      - key: CELERY_RESULT_BACKEND
+        fromService:
+          type: redis
+          name: voiceforge-redis
+          property: connectionString
+
+  # Redis instance for Celery
+  - type: redis
+    name: voiceforge-redis
+    ipAllowList: [] # empty allows internal connections only by default
+    plan: starter
+
+databases:
+  # The PostgreSQL Database
+  - name: voiceforge-db
+    databaseName: voiceforge
+    user: db_user
+    plan: starter

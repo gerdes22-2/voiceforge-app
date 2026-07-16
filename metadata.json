@@ -1,0 +1,6 @@
+{
+  "name": "VoiceForge AI Studio",
+  "description": "Professional AI music production platform for training personal voice models, converting AI-generated vocals, and professional-grade music mastering.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

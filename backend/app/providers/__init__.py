@@ -1,0 +1,33 @@
+from app.runtime.registry import ProviderRegistry
+from app.providers.transcription.whisper import WhisperProvider
+
+# Auto-register standard providers
+ProviderRegistry.register(WhisperProvider)
+from app.providers.separation.melband import MelBandRoformerProvider
+from app.providers.separation.demucs import DemucsProvider
+ProviderRegistry.register(MelBandRoformerProvider)
+ProviderRegistry.register(DemucsProvider)
+from app.providers.voice.dataset_quality import DatasetQualityAnalyzer
+ProviderRegistry.register(DatasetQualityAnalyzer)
+from app.providers.analysis.intelligence import AudioIntelligenceProvider
+from app.providers.voice.evaluation import VoiceModelEvaluationProvider
+ProviderRegistry.register(AudioIntelligenceProvider)
+ProviderRegistry.register(VoiceModelEvaluationProvider)
+from app.providers.voice.preparation.cleaning import AudioCleaningProvider
+from app.providers.voice.preparation.segmentation import SmartSegmentationProvider
+from app.providers.voice.preparation.verification import SpeakerVerificationProvider
+from app.providers.voice.preparation.extraction import FeatureExtractionProvider
+from app.providers.voice.training.rvc import RVCTrainingProvider
+ProviderRegistry.register(AudioCleaningProvider)
+ProviderRegistry.register(SmartSegmentationProvider)
+ProviderRegistry.register(SpeakerVerificationProvider)
+ProviderRegistry.register(FeatureExtractionProvider)
+ProviderRegistry.register(RVCTrainingProvider)
+from app.providers.conversion.rvc import RVCInferenceProvider
+from app.providers.postprocessing.enhancement import VocalEnhancementProvider
+from app.providers.postprocessing.mixing import MixingProvider
+from app.providers.postprocessing.export import ExportProvider
+ProviderRegistry.register(RVCInferenceProvider)
+ProviderRegistry.register(VocalEnhancementProvider)
+ProviderRegistry.register(MixingProvider)
+ProviderRegistry.register(ExportProvider)
