@@ -3,6 +3,7 @@ import { useStore } from '../store/useStore';
 import { Play, Settings2, Download, Mic2, Activity, SlidersHorizontal, Share2, Star, CheckCircle2 } from 'lucide-react';
 import { cn } from '../lib/utils';
 import AudioPlayer from '../components/AudioPlayer';
+import MasteringEngine from '../components/MasteringEngine';
 
 export default function ConversionStudio() {
   const { voiceModels, addJob } = useStore();
@@ -221,6 +222,7 @@ export default function ConversionStudio() {
                   </button>
                </div>
             )}
+            <MasteringEngine />
           </div>
         </div>
       </div>

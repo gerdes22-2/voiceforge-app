@@ -11,3 +11,7 @@ celery_app = Celery(
     broker=CELERY_BROKER_URL,
     backend=CELERY_RESULT_BACKEND,
 )
+
+if CELERY_BROKER_URL.startswith("rediss://"):
+    celery_app.conf.broker_use_ssl = {"ssl_cert_reqs": "CERT_NONE"}
+    celery_app.conf.redis_backend_use_ssl = {"ssl_cert_reqs": "CERT_NONE"}

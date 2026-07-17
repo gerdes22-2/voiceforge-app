@@ -4,6 +4,9 @@ class Settings(BaseSettings):
     PROJECT_NAME: str = "VoiceForge"
     API_V1_STR: str = "/api/v1"
     
+    # Database
+    DATABASE_URL: str = "postgresql+asyncpg://postgres:postgres@localhost:5432/voiceforge"
+    
     # Auth
     SECRET_KEY: str = "super-secret-key-change-in-production"
     ALGORITHM: str = "HS256"
