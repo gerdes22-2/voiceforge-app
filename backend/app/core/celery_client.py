@@ -1,4 +1,5 @@
 import os
+import ssl
 from celery import Celery
 
 REDIS_HOST = os.getenv("REDIS_HOST", "localhost")
@@ -13,5 +14,5 @@ celery_app = Celery(
 )
 
 if CELERY_BROKER_URL.startswith("rediss://"):
-    celery_app.conf.broker_use_ssl = {"ssl_cert_reqs": "CERT_NONE"}
-    celery_app.conf.redis_backend_use_ssl = {"ssl_cert_reqs": "CERT_NONE"}
+    celery_app.conf.broker_use_ssl = {"ssl_cert_reqs": ssl.CERT_NONE}
+    celery_app.conf.redis_backend_use_ssl = {"ssl_cert_reqs": ssl.CERT_NONE}

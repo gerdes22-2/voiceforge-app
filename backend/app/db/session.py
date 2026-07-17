@@ -3,7 +3,9 @@ from sqlalchemy.orm import sessionmaker
 from app.core.config import settings
 
 engine = create_async_engine(
-    settings.DATABASE_URL,
+    settings.DATABASE_URL.replace("postgresql://", "postgresql+asyncpg://") 
+    if settings.DATABASE_URL.startswith("postgresql://") and not settings.DATABASE_URL.startswith("postgresql+asyncpg://") 
+    else settings.DATABASE_URL,
     pool_pre_ping=True,
     echo=False,
 )
