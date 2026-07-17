@@ -3,7 +3,7 @@ services:
   - type: web
     name: voiceforge-api
     env: docker
-    dockerfilePath: backend/Dockerfile
+    dockerfilePath: Dockerfile
     envVars:
       - key: DATABASE_URL
         sync: false 
