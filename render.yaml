@@ -25,9 +25,21 @@ services:
           name: voiceforge-redis
           property: connectionString
       - key: JWT_SECRET
-        generateValue: true
+        sync: false
+      - key: STORAGE_PROVIDER
+        value: "s3"
+      - key: S3_ENDPOINT_URL
+        sync: false
+      - key: S3_ACCESS_KEY_ID
+        sync: false
+      - key: S3_SECRET_ACCESS_KEY
+        sync: false
+      - key: S3_BUCKET_NAME
+        value: "voiceforge"
+      - key: S3_REGION_NAME
+        value: "auto"
 
-  # The Celery Worker for AI Tasks (Requires sufficient RAM/CPU, ideally GPU)
+  # The Celery Worker for AI Tasks
   - type: worker
     name: voiceforge-worker
     env: docker
@@ -52,11 +64,23 @@ services:
           type: redis
           name: voiceforge-redis
           property: connectionString
+      - key: STORAGE_PROVIDER
+        value: "s3"
+      - key: S3_ENDPOINT_URL
+        sync: false
+      - key: S3_ACCESS_KEY_ID
+        sync: false
+      - key: S3_SECRET_ACCESS_KEY
+        sync: false
+      - key: S3_BUCKET_NAME
+        value: "voiceforge"
+      - key: S3_REGION_NAME
+        value: "auto"
 
   # Redis instance for Celery
   - type: redis
     name: voiceforge-redis
-    ipAllowList: [] # empty allows internal connections only by default
+    ipAllowList: []
     plan: starter
 
 databases:
