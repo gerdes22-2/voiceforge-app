@@ -6,13 +6,13 @@ services:
     dockerfilePath: backend/Dockerfile
     envVars:
       - key: DATABASE_URL
-        sync: false # Provide your Supabase / Neon connection string here
+        sync: false 
       - key: REDIS_URL
-        sync: false # Provide your Upstash Redis connection string here
+        sync: false 
       - key: CELERY_BROKER_URL
-        sync: false # Same as REDIS_URL
+        sync: false 
       - key: CELERY_RESULT_BACKEND
-        sync: false # Same as REDIS_URL
+        sync: false 
       - key: JWT_SECRET
         sync: false
       - key: STORAGE_PROVIDER
@@ -24,6 +24,6 @@ services:
       - key: S3_SECRET_ACCESS_KEY
         sync: false
       - key: S3_BUCKET_NAME
-        value: "voiceforge" # Change this if your bucket has a different name
+        value: "voiceforge" 
       - key: S3_REGION_NAME
         value: "auto"
