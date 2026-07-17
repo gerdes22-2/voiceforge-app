@@ -1,5 +1,5 @@
-celery[redis]==5.3.6
-pydantic==2.6.3
-python-json-logger==2.0.7
+celery[redis]
+pydantic
+python-json-logger
 boto3
 aioboto3
