@@ -17,9 +17,15 @@ if config.config_file_name is not None:
 target_metadata = Base.metadata
 
 def get_url():
-    # Force psycopg2 for sync migrations or asyncpg for async
-    url = settings.get_database_url()
-    return url.replace("asyncpg", "psycopg2")
+    url = settings.DATABASE_URL
+    if url.startswith("postgres://"):
+        url = url.replace("postgres://", "postgresql://", 1)
+    if "asyncpg" in url:
+        url = url.replace("+asyncpg", "")
+    if "postgresql://" in url and not "psycopg2" in url:
+        # Actually standard postgresql:// uses psycopg2 by default in sqlalchemy
+        pass
+    return url
 
 def run_migrations_offline() -> None:
     url = get_url()

@@ -6,9 +6,7 @@ import logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-db_url = settings.DATABASE_URL.replace("postgresql://", "postgresql+asyncpg://") \
-    if settings.DATABASE_URL.startswith("postgresql://") and not settings.DATABASE_URL.startswith("postgresql+asyncpg://") \
-    else settings.DATABASE_URL
+db_url = settings.async_database_url
 
 logger.info(f"Final DATABASE_URL: {db_url}")
 

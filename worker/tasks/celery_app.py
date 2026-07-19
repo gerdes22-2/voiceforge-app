@@ -1,5 +1,6 @@
 from celery import Celery
 from core.config import settings
+import ssl
 
 celery_app = Celery(
     "voiceforge_worker",
@@ -16,3 +17,7 @@ celery_app.conf.update(
     enable_utc=True,
     task_track_started=True,
 )
+
+if settings.CELERY_BROKER_URL.startswith("rediss://"):
+    celery_app.conf.broker_use_ssl = {"ssl_cert_reqs": ssl.CERT_NONE}
+    celery_app.conf.redis_backend_use_ssl = {"ssl_cert_reqs": ssl.CERT_NONE}
