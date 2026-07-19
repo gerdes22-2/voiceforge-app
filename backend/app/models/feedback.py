@@ -1,15 +1,15 @@
-from sqlalchemy import Column, String, Integer, ForeignKey, JSON, DateTime
-from sqlalchemy.dialects.postgresql import UUID
-from sqlalchemy.sql import func
-from app.db.session import Base
+from sqlalchemy import String, Integer, ForeignKey, JSON
+from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.dialects.postgresql import JSONB
+from app.models.base import Base, UUIDMixin, TimestampMixin
 import uuid
 
-class ConversionFeedback(Base):
+class ConversionFeedback(Base, UUIDMixin, TimestampMixin):
     __tablename__ = "conversion_feedbacks"
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    user_id = Column(UUID(as_uuid=True), ForeignKey("users.id"))
-    voice_model_id = Column(UUID(as_uuid=True), ForeignKey("voice_models.id"))
-    rating = Column(Integer, nullable=False)
-    conversion_settings = Column(JSON)
-    song_type = Column(String)
-    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    
+    user_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("users.id"))
+    voice_model_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("voice_models.id"))
+    rating: Mapped[int] = mapped_column(Integer, nullable=False)
+    conversion_settings: Mapped[dict] = mapped_column(JSON, nullable=True)
+    song_type: Mapped[str] = mapped_column(String, nullable=True)
+
