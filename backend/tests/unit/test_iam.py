@@ -1,5 +1,5 @@
 import pytest
-from uuid7 import uuid7
+import uuid
 from datetime import datetime, timezone, timedelta
 from app.models.iam import Organization, OrganizationMember, RefreshToken, RolePermission
 from app.models.user import User
@@ -17,13 +17,13 @@ def test_organization_model():
     assert org.name == "Test Studio"
 
 def test_organization_member():
-    u_id = uuid7()
-    o_id = uuid7()
+    u_id = uuid.uuid4()
+    o_id = uuid.uuid4()
     member = OrganizationMember(organization_id=o_id, user_id=u_id, role=UserRole.ARTIST)
     assert member.role == UserRole.ARTIST
 
 def test_refresh_token_model():
-    u_id = uuid7()
+    u_id = uuid.uuid4()
     expires = datetime.now(timezone.utc) + timedelta(days=7)
     token = RefreshToken(user_id=u_id, token="random_token_string", expires_at=expires)
     assert token.token == "random_token_string"

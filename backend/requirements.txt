@@ -6,7 +6,6 @@ asyncpg
 psycopg2-binary
 pydantic
 pydantic-settings
-uuid7
 python-jose[cryptography]
 passlib[bcrypt]
 python-multipart

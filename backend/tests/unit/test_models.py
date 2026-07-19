@@ -1,5 +1,5 @@
 import pytest
-from uuid7 import uuid7
+import uuid
 from datetime import datetime, timezone
 from app.models import (
     User, Project, Song, AudioCache, VoiceDataset, VoiceDatasetVersion,
@@ -15,20 +15,20 @@ def test_user_model_instantiation():
     assert user.role == UserRole.ADMIN
 
 def test_project_model_instantiation():
-    u_id = uuid7()
+    u_id = uuid.uuid4()
     project = Project(user_id=u_id, name="Test Project")
     assert project.user_id == u_id
     assert project.name == "Test Project"
 
 def test_song_model_instantiation():
-    p_id = uuid7()
-    file_id = uuid7()
+    p_id = uuid.uuid4()
+    file_id = uuid.uuid4()
     song = Song(project_id=p_id, original_file_uuid=file_id, title="Test Song")
     assert song.project_id == p_id
     assert song.status == "uploaded"
 
 def test_job_benchmark_instantiation():
-    j_id = uuid7()
+    j_id = uuid.uuid4()
     benchmark = JobBenchmark(
         processing_job_id=j_id,
         provider_used="demucs",
@@ -48,9 +48,9 @@ def test_job_benchmark_instantiation():
     assert benchmark.quality_score["confidence"] == 0.95
 
 def test_dataset_versioning_instantiation():
-    u_id = uuid7()
+    u_id = uuid.uuid4()
     dataset = VoiceDataset(user_id=u_id, name="My Voice")
-    d_id = uuid7()
+    d_id = uuid.uuid4()
     version = VoiceDatasetVersion(dataset_id=d_id, version_tag="v1.0", file_uuids=["file1", "file2"])
     
     assert dataset.name == "My Voice"
