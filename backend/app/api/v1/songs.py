@@ -3,7 +3,7 @@ from fastapi import APIRouter, Depends, HTTPException, status, UploadFile, File,
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from app.api.deps import get_db, get_current_user
-from app.models.schema import User, Project, Song
+from app.models import User, Project, Song
 from app.schemas.song import SongRead
 from app.services.storage import storage_service
 import uuid

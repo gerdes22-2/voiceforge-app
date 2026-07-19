@@ -9,6 +9,6 @@ celery -A tasks.celery_app worker --loglevel=info &
 
 # Start FastAPI in the foreground
 cd ../backend || cd /app/backend
-python create_tables.py
+python3 create_tables.py
 alembic upgrade head || true
 uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}

@@ -11,4 +11,7 @@ from app.api.v1 import workflows
 api_router.include_router(workflows.router, prefix='/workflows', tags=['workflows'])
 from app.api.v1 import voice_models
 api_router.include_router(voice_models.router, prefix='/voice-models', tags=['voice-models'])
+from app.api.v1 import feedbacks, jobs, songs
 api_router.include_router(feedbacks.router, prefix='/feedbacks', tags=['feedbacks'])
+api_router.include_router(jobs.router, prefix='/jobs', tags=['jobs'])
+api_router.include_router(songs.router, prefix='/songs', tags=['songs'])

@@ -1,5 +1,5 @@
 celery[redis]
 pydantic
 python-json-logger
-boto3
-aioboto3
+boto3>=1.34.0
+aioboto3>=13.0.0

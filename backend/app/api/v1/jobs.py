@@ -4,14 +4,14 @@ from fastapi.responses import EventSourceResponse
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from app.api.deps import get_db, get_current_user
-from app.models.schema import User, Job, Song, Project
+from app.models import User, ProcessingJob, Song, Project
 from app.schemas.job import JobCreate, JobRead
 import uuid
 import logging
 import asyncio
 from celery.result import AsyncResult
 # Import celery app configuration to get task states
-from core.celery_client import celery_app
+from app.core.celery_client import celery_app
 
 logger = logging.getLogger("backend.jobs")
 router = APIRouter()
